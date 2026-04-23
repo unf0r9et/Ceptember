@@ -8,12 +8,18 @@
 #include "string"
 #include "logger.hpp"
 #include "httpController.hpp"
+#include <filesystem>
+#include <unordered_set>
+#include "fileSearch.hpp"
 
 logger LOGGER("../logs/frameworkLogs.txt");
+namespace fs = std::filesystem;
+std::unordered_set<std::string> staticDirectories;
 
 void openSocket();
 
 int engine::startTheRain() {
+    staticDirectories = buildFolderSet(StaticRootPath);
     openSocket();
     // std::thread t(openSocket);
     // t.join();
@@ -83,3 +89,4 @@ void openSocket() {
         client_thread.detach();
     }
 }
+

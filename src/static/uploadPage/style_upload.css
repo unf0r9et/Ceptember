@@ -1,0 +1,188 @@
+/* --- upload_style.css --- */
+
+:root {
+    /* Та же палитра для согласованности */
+    --bg-main: #1a1b26;
+    --bg-secondary: #24283b;
+    --bg-hover: #2f3549;
+
+    --text-main: #a9b1d6;
+    --text-header: #c0caf5;
+    --text-muted: #787c99;
+
+    --accent-teal: #73daca;
+    --accent-lavender: #bb9af7;
+    --accent-coral: #ff9e64;
+
+    --border-color: #414868;
+    --success-color: #9ece6a; /* Пастельный зеленый */
+    --error-color: #f7768e;   /* Пастельный красный */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Легкий фоновый градиент для объема */
+    background-image: radial-gradient(circle at 10% 20%, rgba(115, 218, 202, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(187, 154, 247, 0.03) 0%, transparent 20%);
+}
+
+.container { width: 100%; max-width: 540px; padding: 20px; }
+
+/* Карточка загрузки */
+.upload-card {
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 45px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.card-header h2 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-header);
+    letter-spacing: -0.5px;
+}
+.card-header p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 35px; }
+
+/* Drag & Drop зона */
+.drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 50px 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: rgba(36, 40, 59, 0.5);
+}
+
+.drop-zone:hover {
+    border-color: var(--accent-teal);
+    background: rgba(115, 218, 202, 0.05);
+}
+
+.drop-zone.dragover {
+    border-color: var(--accent-lavender);
+    background: rgba(187, 154, 247, 0.08);
+    transform: scale(1.01);
+}
+
+.icon-container {
+    font-size: 3.5rem;
+    color: var(--text-muted); /* Изначально серый */
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+
+.drop-zone:hover .icon-container {
+    color: var(--accent-teal); /* Становится бирюзовым при наведении */
+}
+
+.drop-text { display: block; color: var(--text-muted); margin-bottom: 20px; }
+
+.browse-btn {
+    background: transparent;
+    color: var(--accent-teal);
+    border: 1px solid var(--border-color);
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.browse-btn:hover {
+    border-color: var(--accent-teal);
+    background-color: rgba(115, 218, 202, 0.1);
+}
+
+/* Детали файла */
+.details-step { margin-top: 25px; text-align: left; animation: fadeIn 0.4s ease-out; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.file-summary {
+    display: flex;
+    align-items: center;
+    background: var(--bg-main); /* Темнее чем карточка */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+}
+
+.file-icon { color: var(--accent-lavender); font-size: 1.8rem; margin-right: 15px; }
+.file-details .name { display: block; font-weight: 600; color: var(--text-header); margin-bottom: 3px; }
+.file-details .size { display: block; font-size: 0.8rem; color: var(--text-muted); }
+
+.remove-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; transition: color 0.2s; }
+.remove-btn:hover { color: var(--error-color); }
+
+/* Поля ввода */
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
+
+.input-group input {
+    width: 100%;
+    padding: 14px 18px;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-header);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    border-color: var(--accent-teal);
+    box-shadow: 0 0 0 3px rgba(115, 218, 202, 0.1);
+}
+
+/* Кнопка отправки */
+.upload-btn {
+    width: 100%;
+    padding: 16px;
+    /* Градиент: Бирюзовый -> Лаванда (очень стильно) */
+    background: linear-gradient(135deg, var(--accent-teal), #7aa2f7);
+    border: none;
+    border-radius: 10px;
+    color: #15161e; /* Темный текст для контраста */
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+}
+
+.upload-btn:hover {
+    opacity: 0.95;
+    box-shadow: 0 10px 25px rgba(115, 218, 202, 0.3);
+    transform: translateY(-2px);
+}
+.upload-btn:active { transform: scale(0.98); }
+
+/* Прогресс */
+.progress-container { margin-top: 30px; }
+.progress-bar { width: 100%; height: 6px; background: var(--bg-main); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    /* Градиент заполнения */
+    background: linear-gradient(90deg, var(--accent-teal), var(--accent-lavender));
+    transition: width 0.1s linear;
+}
+
+.progress-text { font-size: 0.85rem; color: var(--text-muted); text-align: right; font-family: monospace; }
+.status-message { margin-top: 20px; font-weight: 600; text-align: center; }
+.status-success { color: var(--success-color); }
+.status-error { color: var(--error-color); }

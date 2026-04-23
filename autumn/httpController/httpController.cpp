@@ -2,6 +2,7 @@
 #include "logger.hpp"
 #include <parser.hpp>
 #include <mutex>
+#include "staticHandler.hpp"
 
 #define debug
 
@@ -16,12 +17,15 @@ thread_local static std::string REQUEST;
 thread_local httpController::mode MD = httpController::Request;
 thread_local std::vector<std::string> vector_request;
 
-
 std::string httpController::startHttpController(const std::string &request) {
     REQUEST = request;
     switch (MD) {
         case Request:
             vector_request = parser::parse(request);
+
+            if (std::string response = isStaticFile(vector_request[1]); !response.empty()) {
+                return response;
+            }
 
 #ifdef debug
             LOGGER.log_server("Method: " + vector_request[0] + " Endpoint: " + vector_request[1], SERVER_PORT,

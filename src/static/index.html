@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CppTube - Главная</title>
+    <link rel="stylesheet" href="style_main.css">
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header class="header">
+    <div class="logo">Cpp<span class="highlight">Tube</span></div>
+
+    <!-- Кнопка поиска (декоративная пока что) -->
+    <div class="search-bar">
+        <input type="text" placeholder="Поиск видео...">
+    </div>
+
+    <!-- Кнопка перехода на страницу загрузки -->
+    <!-- Твой сервер должен обрабатывать GET запрос на /uploadPage -->
+    <a href="/uploadPage" class="upload-btn">
+        <span>+</span> Загрузить видео
+    </a>
+</header>
+
+<!-- Основной контент: Сетка видео -->
+<main>
+    <h2>Свежие ролики</h2>
+
+    <!-- Сюда JavaScript будет вставлять видео -->
+    <div id="video-grid" class="video-grid">
+        <!-- Пока пусто, JS заполнит это -->
+    </div>
+</main>
+
+<script src="script_main.js"></script>
+</body>
+</html>

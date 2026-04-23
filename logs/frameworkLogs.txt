@@ -15,3 +15,98 @@
 [2026-04-24 00:26:40] [INFO] [PORT:8080] Client connected
 [2026-04-24 00:26:40] [INFO] [PORT:8080] Client 127.0.0.1:35982 connected
 [2026-04-24 00:26:40] [DEBUG] [PORT:8080] Method: GET Endpoint: /
+[2026-04-24 00:40:09] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 00:40:09] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 00:40:13] [INFO] [PORT:8080] Client connected
+[2026-04-24 00:40:13] [INFO] [PORT:8080] Client 127.0.0.1:51830 connected
+[2026-04-24 00:40:13] [DEBUG] [PORT:8080] Method: GET Endpoint: /
+[2026-04-24 00:40:15] [INFO] [PORT:8080] Client connected
+[2026-04-24 00:40:15] [INFO] [PORT:8080] Client 127.0.0.1:51842 connected
+[2026-04-24 00:40:15] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 00:40:31] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 00:40:31] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 00:40:33] [INFO] [PORT:8080] Client connected
+[2026-04-24 00:40:33] [INFO] [PORT:8080] Client 127.0.0.1:52364 connected
+[2026-04-24 00:40:33] [DEBUG] [PORT:8080] Method: GET Endpoint: /
+[2026-04-24 02:00:33] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:00:33] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:00:42] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:00:42] [INFO] [PORT:8080] Client 127.0.0.1:55140 connected
+[2026-04-24 02:00:42] [DEBUG] [PORT:8080] Method: GET Endpoint: /
+[2026-04-24 02:00:44] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:00:44] [INFO] [PORT:8080] Client 127.0.0.1:55144 connected
+[2026-04-24 02:00:44] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:01:27] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:01:27] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:01:29] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:01:29] [INFO] [PORT:8080] Client 127.0.0.1:33404 connected
+[2026-04-24 02:01:29] [DEBUG] [PORT:8080] Method: GET Endpoint: /style_main.css
+[2026-04-24 02:01:29] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:01:29] [INFO] [PORT:8080] Client 127.0.0.1:33408 connected
+[2026-04-24 02:01:29] [DEBUG] [PORT:8080] Method: GET Endpoint: /script_main.js
+[2026-04-24 02:02:05] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:02:05] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:02:08] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:02:08] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:02:12] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:02:12] [INFO] [PORT:8080] Client 127.0.0.1:37186 connected
+[2026-04-24 02:02:27] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:02:27] [INFO] [PORT:8080] Client 127.0.0.1:51960 connected
+[2026-04-24 02:02:31] [DEBUG] [PORT:8080] Method: GET Endpoint: /style_main.css
+[2026-04-24 02:02:49] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:02:49] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:02:50] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:02:50] [INFO] [PORT:8080] Client 127.0.0.1:60294 connected
+[2026-04-24 02:02:50] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:02:50] [INFO] [PORT:8080] Client 127.0.0.1:60310 connected
+[2026-04-24 02:02:50] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:02:54] [DEBUG] [PORT:8080] Method: GET Endpoint: /uploadPage
+[2026-04-24 02:03:13] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:03:13] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:03:15] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:15] [INFO] [PORT:8080] Client 127.0.0.1:48850 connected
+[2026-04-24 02:03:16] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:03:18] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:18] [INFO] [PORT:8080] Client 127.0.0.1:48858 connected
+[2026-04-24 02:03:18] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:03:19] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:19] [INFO] [PORT:8080] Client 127.0.0.1:48866 connected
+[2026-04-24 02:03:19] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:03:19] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:19] [INFO] [PORT:8080] Client 127.0.0.1:48870 connected
+[2026-04-24 02:03:19] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:03:20] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:20] [INFO] [PORT:8080] Client 127.0.0.1:50220 connected
+[2026-04-24 02:03:20] [DEBUG] [PORT:8080] Method: GET Endpoint: /watch?v=2
+[2026-04-24 02:03:23] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:23] [INFO] [PORT:8080] Client 127.0.0.1:50228 connected
+[2026-04-24 02:03:23] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:03:24] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:24] [INFO] [PORT:8080] Client 127.0.0.1:50232 connected
+[2026-04-24 02:03:24] [DEBUG] [PORT:8080] Method: GET Endpoint: /watch?v=2
+[2026-04-24 02:03:25] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:25] [INFO] [PORT:8080] Client 127.0.0.1:50246 connected
+[2026-04-24 02:03:25] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:03:26] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:26] [INFO] [PORT:8080] Client 127.0.0.1:50258 connected
+[2026-04-24 02:03:26] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:03:26] [INFO] [PORT:8080] Client 127.0.0.1:50264 connected
+[2026-04-24 02:03:26] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:03:28] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:10:54] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:10:54] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:10:57] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:10:57] [INFO] [PORT:8080] Client 127.0.0.1:59292 connected
+[2026-04-24 02:10:57] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:10:57] [INFO] [PORT:8080] Client 127.0.0.1:59294 connected
+[2026-04-24 02:10:57] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:10:59] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:10:59] [INFO] [PORT:8080] Client 127.0.0.1:59302 connected
+[2026-04-24 02:10:59] [DEBUG] [PORT:8080] Method: GET Endpoint: /favicon.ico
+[2026-04-24 02:11:07] [DEBUG] [PORT:8080] Method: POST Endpoint: /upload-video
+[2026-04-24 02:26:47] [INFO] [PORT:8080] SERVER STARTED
+[2026-04-24 02:26:47] [INFO] [PORT:8080] Waiting for client...
+[2026-04-24 02:26:52] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:26:52] [INFO] [PORT:8080] Client 127.0.0.1:32796 connected
+[2026-04-24 02:26:52] [INFO] [PORT:8080] Client connected
+[2026-04-24 02:26:52] [INFO] [PORT:8080] Client 127.0.0.1:32800 connected

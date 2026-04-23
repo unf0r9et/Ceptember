@@ -13,5 +13,7 @@
 #define ERROR_MODE "ERROR - mode"
 
 #define SERVER_PORT 8080
+#define MaximumRequestSize 10485760
+#define StaticRootPath "../src/static"
 
 #endif //CEPTEMBER_CEPTEMBER_H
