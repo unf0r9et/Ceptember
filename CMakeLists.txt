@@ -20,7 +20,8 @@ add_executable(Ceptember src/main/main.cpp
         autumn/staticHandler/staticHandler.cpp
         autumn/internalHeaders/staticHandler.hpp
         autumn/fileWorker/fileSearch.cpp
-        autumn/fileWorker/fileSearch.h)
+        autumn/internalHeaders/fileSearch.hpp
+        autumn/publicHeaders/request.hpp)
 
 include_directories(${CMAKE_SOURCE_DIR}/autumn)
 include_directories(${CMAKE_SOURCE_DIR}/autumn/publicHeaders)

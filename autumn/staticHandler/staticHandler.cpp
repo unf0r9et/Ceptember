@@ -57,24 +57,24 @@ std::string JS(const std::string &path) {
            + file_content;
 }
 
-std::string makeResponse(const std::string &endpoint, const std::string &contentType) {
+std::string makeResponse(const std::string &path, const std::string &contentType) {
     switch (str_hash_for_switch(contentType)) {
         case "js"_hash: {
-            auto path = findFileRelative(StaticRootPath, endpoint);
-            if (!path) {
+            auto filePath = findFileRelative(StaticRootPath, path);
+            if (!filePath) {
                 return "HTTP/1.1 404 Not Found\r\n\r\n";
             }
-            return JS((fs::path(StaticRootPath) / *path).string());
+            return JS((fs::path(StaticRootPath) / *filePath).string());
         }
         case "css"_hash: {
-            auto path = findFileRelative(StaticRootPath, endpoint);
-            if (!path) {
+            auto filePath = findFileRelative(StaticRootPath, path);
+            if (!filePath) {
                 return "HTTP/1.1 404 Not Found\r\n\r\n";
             }
-            return CSS((fs::path(StaticRootPath) / *path).string());
+            return CSS((fs::path(StaticRootPath) / *filePath).string());
         }
         default:
-            const std::string middle = endpoint.length() > 1 ? endpoint + "/" : endpoint;
+            const std::string middle = path.length() > 1 ? path + "/" : path;
             return HTML(StaticRootPath + middle + "index.html");
     }
 }

@@ -4,7 +4,6 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <thread>
-#include <chrono>
 #include "string"
 #include "logger.hpp"
 #include "httpController.hpp"
@@ -13,18 +12,7 @@
 #include "fileSearch.hpp"
 
 logger LOGGER("../logs/frameworkLogs.txt");
-namespace fs = std::filesystem;
 std::unordered_set<std::string> staticDirectories;
-
-void openSocket();
-
-int engine::startTheRain() {
-    staticDirectories = buildFolderSet(StaticRootPath);
-    openSocket();
-    // std::thread t(openSocket);
-    // t.join();
-    return 0;
-}
 
 void openSocket() {
     LOGGER.log_server("SERVER STARTED", SERVER_PORT, logger::INFO);
@@ -90,3 +78,10 @@ void openSocket() {
     }
 }
 
+int engine::startTheRain() {
+    staticDirectories = buildFolderSet(StaticRootPath);
+    openSocket();
+    // std::thread t(openSocket);
+    // t.join();
+    return 0;
+}
