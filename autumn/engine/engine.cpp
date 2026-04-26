@@ -11,8 +11,20 @@
 #include <unordered_set>
 #include "fileSearch.hpp"
 
-logger LOGGER("../logs/frameworkLogs.txt");
+logger LOGGER(LoggerPath);
 std::unordered_set<std::string> staticDirectories;
+
+extern thread_local mode MD;
+extern thread_local int content_size;
+extern thread_local requestEntity rqEntity;
+extern thread_local std::string CURRENT_TEMP_FILE_PATH;
+
+void resetThreadState() {
+    MD = RequestHTTP;
+    content_size = 0;
+    rqEntity = requestEntity();
+    CURRENT_TEMP_FILE_PATH = "";
+}
 
 void openSocket() {
     LOGGER.log_server("SERVER STARTED", SERVER_PORT, logger::INFO);
@@ -55,7 +67,9 @@ void openSocket() {
             std::to_string(ntohs(client_address.sin_port)) + " connected", SERVER_PORT, logger::INFO);
 
         std::thread client_thread([socket_client]() {
-            char buf[65536];
+            resetThreadState();
+
+            char buf[MaximumRequestSize];
 
             while (true) {
                 int bytes = recv(socket_client, buf, sizeof(buf), 0);
@@ -64,7 +78,7 @@ void openSocket() {
                 std::string request_data(buf, bytes);
 
                 std::string response = httpController::startHttpController(request_data);
-                if (response == "LOADING_PROCESS") {
+                if (response == LOADING_PROCESS) {
                     continue;
                 }
 

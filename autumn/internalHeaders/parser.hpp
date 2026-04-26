@@ -7,10 +7,11 @@
 
 #include <string>
 #include <vector>
+#include <requestEntity.hpp>
 
 class parser {
 public:
-    static std::vector<std::string> parse(const std::string &);
+    static requestEntity parse(const std::string &);
 };
 
 

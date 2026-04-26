@@ -3,51 +3,57 @@
 #include <parser.hpp>
 #include <mutex>
 #include "staticHandler.hpp"
+#include "requestBodiesWorker.hpp"
 
 #define debug
 
 extern logger LOGGER;
 
-thread_local size_t content_size;
+thread_local int content_size;
 
-thread_local static bool IS_FIRST_CHUNK = true;
+thread_local mode MD = RequestHTTP;
 
-thread_local static std::string REQUEST;
+thread_local requestEntity rqEntity;
 
-thread_local httpController::mode MD = httpController::Request;
-thread_local std::vector<std::string> vector_request;
+std::string httpController::handleMethods() {
+    switch (str_hash_for_switch(rqEntity.method)) {
+        case "GET"_hash:    return methods_GET();
+        case "POST"_hash:   return methods_POST();
+        case "PUT"_hash:    return methods_PUT();
+        case "DELETE"_hash: return methods_DELETE();
+        default:            return HTTP_RESPONSE_405;
+    }
+}
+
 
 std::string httpController::startHttpController(const std::string &request) {
-    REQUEST = request;
     switch (MD) {
-        case Request:
-            vector_request = parser::parse(request);
+        case RequestHTTP:
 
-            if (std::string response = isStaticFile(vector_request[1]); !response.empty()) {
+            rqEntity = parser::parse(request);
+
+            if (MD == LoadingHTTP) {
+                return LOADING_PROCESS;
+            }
+
+            if (std::string response = isStaticFile(rqEntity.path); !response.empty()) {
                 return response;
             }
 
 #ifdef debug
-            LOGGER.log_server("Method: " + vector_request[0] + " Endpoint: " + vector_request[1], SERVER_PORT,
+            LOGGER.log_server("Method: " + rqEntity.method + " Endpoint: " + rqEntity.path, SERVER_PORT,
                                  logger::DEBUG);
 #endif
-
-            switch (str_hash_for_switch(vector_request[0])) {
-                case "GET"_hash:
-                    return methods_GET();
-                case "POST"_hash:
-                    return methods_POST();
-                case "PUT"_hash:
-                    return methods_PUT();
-                case "DELETE"_hash:
-                    return methods_DELETE();
-                default:
-                    return ERROR_METHOD;
+            return handleMethods();
+        case LoadingHTTP:
+            requestBodiesWorker::writeBodyToDisk(request, false);
+            content_size -= static_cast<int>(request.length());
+            if (content_size <= 0) {
+                MD = RequestHTTP;
+                return handleMethods();
             }
-        // case Loading:
-        //     std::string answer = endpoints::upload_video_endpoint(REQUEST, IS_FIRST_CHUNK);
-        //     if (answer != "LOADING_PROCESS") MD = Request;
-        //     return answer;
+            return LOADING_PROCESS;
+
     }
-    return ERROR_MODE;
+    return HTTP_RESPONSE_500;
 }

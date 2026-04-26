@@ -1,15 +1,17 @@
-#include <vector>
 #include "parser.hpp"
-#include <string>
 #include "picoHttpParser.h"
-#include <nlohmann/json.hpp>
 #include <iostream>
+#include <raindrop.hpp>
+#include "requestBodiesWorker.hpp"
 
-using json = nlohmann::json;
+thread_local std::string CURRENT_TEMP_FILE_PATH;
+extern thread_local mode MD;
+extern thread_local int content_size;
 
-std::vector<std::string> parser::parse(const std::string &request) {
+requestEntity parser::parse(const std::string &request) {
+    requestEntity rqEntity;
 
-    const char* buffer = request.c_str();
+    const char *buffer = request.c_str();
     size_t buf_len = request.length();
 
     std::vector<std::string> result;
@@ -31,37 +33,37 @@ std::vector<std::string> parser::parse(const std::string &request) {
     );
 
     if (bytes_consumed > 0) {
-
-        result.emplace_back(method, method_len);
-        result.emplace_back(path, path_len);
+        rqEntity.method = std::string(method, method_len);
+        rqEntity.path = std::string(path, path_len);
 
         int content_length = 0;
+
         for (size_t i = 0; i < num_headers; ++i) {
             std::string name(headers[i].name, headers[i].name_len);
-            result.emplace_back(headers[i].name, headers[i].name_len);
+            std::string value(headers[i].value, headers[i].value_len);
+            rqEntity.headers.emplace_back(name, value);
+
             if (name == "Content-Length" || name == "content-length") {
                 std::string val(headers[i].value, headers[i].value_len);
                 content_length = std::stoi(val);
-                result.emplace_back(headers[i].value, headers[i].value_len);
             }
         }
 
 
         if (content_length > 0) {
+            const char *body_start = buffer + bytes_consumed;
 
-            const char* body_start = buffer + bytes_consumed;
-
-            if (buf_len >= bytes_consumed + content_length) {
+            if (content_length <= MaximumRequestSize - bytes_consumed) {
                 std::string body_str(body_start, content_length);
-                std::cout << "Body Raw: " << body_str << "\n";
-
-                try {
-                    auto j = json::parse(body_str);
-                    std::cout << "Parsed JSON key 'foo': " << j["foo"] << "\n";
-                } catch(...) {
-                    std::cout << "Not a JSON body\n";
-                }
+                rqEntity.body = body_str;
+            } else {
+                size_t body_len = buf_len - bytes_consumed;
+                requestBodiesWorker::writeBodyToDisk(std::string(body_start, body_len), true);
+                rqEntity.body = CURRENT_TEMP_FILE_PATH;
+                content_size = content_length - body_len;
+                MD = LoadingHTTP;
             }
+
         }
     } else if (bytes_consumed == -1) {
         std::cerr << "Parse error\n";
@@ -69,5 +71,5 @@ std::vector<std::string> parser::parse(const std::string &request) {
         std::cout << "Request incomplete, read more from socket...\n";
     }
 
-    return result;
+    return rqEntity;
 }

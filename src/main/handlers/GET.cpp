@@ -1,11 +1,11 @@
 #include "httpController.hpp"
 
-extern thread_local std::vector<std::string> vector_request;
+extern thread_local requestEntity rqEntity;
 
 std::string httpController::methods_GET() {
-    switch (str_hash_for_switch(vector_request[1])) {
+    switch (str_hash_for_switch(rqEntity.method)) {
         case "/"_hash:
         default:
-            return ERROR_ENDPOINT;
+            return HTTP_RESPONSE_404;
     }
 }

@@ -6,12 +6,14 @@
 
 #include "str_switch.h"
 #include "raindrop.hpp"
+#include "requestEntity.hpp"
 
 class httpController {
 public:
-    enum mode { Request, Loading };
 
     static std::string startHttpController(const std::string &);
+
+    std::string static handleMethods();
 
     static std::string methods_GET();
 

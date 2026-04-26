@@ -4,12 +4,13 @@
 #include "picoHttpParser.h"
 #include <vector>
 #include <string>
+#include <utility>
 
-class request {
+class requestEntity {
 public:
     std::string method;
     std::string path;
-    std::vector<phr_header> headers;
+    std::vector<std::pair<std::string, std::string>> headers;
     std::string body;
 };
 
