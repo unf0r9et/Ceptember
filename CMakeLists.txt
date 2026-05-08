@@ -16,6 +16,7 @@ add_executable(Ceptember
         # Parser
         autumn/parser/parser.cpp
         autumn/parser/picoHttpParser/picoHttpParser.c
+        autumn/parser/MultipartParser/MultipartParser.cpp
 
         # HTTP controller
         autumn/httpController/httpController.cpp
@@ -24,11 +25,23 @@ add_executable(Ceptember
         autumn/staticHandler/staticHandler.cpp
 
         # File worker
-        autumn/utils/fileWorker/fileReader.cpp
-        autumn/utils/fileWorker/fileSearch.cpp
+        autumn/utils/workers/fileWorker/fileReader.cpp
+        autumn/utils/workers/fileWorker/fileSearch.cpp
+
+        # Video worker
+        autumn/utils/workers/videoWorker/videoWorker.cpp
+
+        # Docs worker
+        autumn/utils/workers/docsWorker/docsWorker.cpp
+
+        # File saver
+        autumn/utils/fileSaver/fileSaver.cpp
 
         # Request processing
-        autumn/utils/requestBodiesWorker/requestBodiesWorker.cpp
+        autumn/utils/workers/requestBodiesWorker/requestBodiesWorker.cpp
+
+        # Delete file
+        autumn/utils/deleteFile/deleteFile.cpp
 
         # Handlers
         src/main/handlers/GET.cpp
