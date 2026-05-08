@@ -15,7 +15,7 @@
 #define TEMP_FILE_PREFIX "../autumn/files/requestBodies/unf0r9etpref_"
 #define LOADING_PROCESS "LOADING_PROCESS"
 
-enum mode { RequestHTTP, LoadingHTTP };
+enum mode { RequestHTTP, LoadingHTTP, LoadingShortHTTP };
 
 
 /**

@@ -1,4 +1,5 @@
 #include "httpController.hpp"
+#include <iostream>
 #include "logger.hpp"
 #include <parser.hpp>
 #include <mutex>
@@ -17,14 +18,13 @@ thread_local requestEntity rqEntity;
 
 std::string httpController::handleMethods() {
     switch (str_hash_for_switch(rqEntity.method)) {
-        case "GET"_hash:    return methods_GET();
-        case "POST"_hash:   return methods_POST();
-        case "PUT"_hash:    return methods_PUT();
+        case "GET"_hash: return methods_GET();
+        case "POST"_hash: return methods_POST();
+        case "PUT"_hash: return methods_PUT();
         case "DELETE"_hash: return methods_DELETE();
-        default:            return HTTP_RESPONSE_405;
+        default: return HTTP_RESPONSE_405;
     }
 }
-
 
 std::string httpController::startHttpController(const std::string &request) {
     switch (MD) {
@@ -32,7 +32,7 @@ std::string httpController::startHttpController(const std::string &request) {
 
             rqEntity = parser::parse(request);
 
-            if (MD == LoadingHTTP) {
+            if (MD == LoadingHTTP || MD == LoadingShortHTTP) {
                 return LOADING_PROCESS;
             }
 
@@ -41,8 +41,9 @@ std::string httpController::startHttpController(const std::string &request) {
             }
 
 #ifdef debug
-            LOGGER.log_server("Method: " + rqEntity.method + " Endpoint: " + rqEntity.path, SERVER_PORT,
-                                 logger::DEBUG);
+            LOGGER.log_server("[HTTP_CONTROLLER] Method: " + rqEntity.method + " Endpoint: " + rqEntity.path,
+                              SERVER_PORT,
+                              logger::DEBUG);
 #endif
             return handleMethods();
         case LoadingHTTP:
@@ -54,6 +55,32 @@ std::string httpController::startHttpController(const std::string &request) {
             }
             return LOADING_PROCESS;
 
+        case LoadingShortHTTP:
+            rqEntity.body.append(request);
+
+#ifdef debug
+            LOGGER.log_server("[HTTP_CONTROLLER] Content length before step: " + std::to_string(content_size),
+                              SERVER_PORT,
+                              logger::DEBUG);
+#endif
+
+            content_size -= static_cast<int>(request.length());
+
+#ifdef debug
+            LOGGER.log_server("[HTTP_CONTROLLER] Content length after step: " + std::to_string(content_size),
+                              SERVER_PORT,
+                              logger::DEBUG);
+            LOGGER.log_server("[HTTP_CONTROLLER] Request body length after step:: " + std::to_string(rqEntity.body.length()),
+                              SERVER_PORT,
+                              logger::DEBUG);
+
+#endif
+
+            if (content_size <= 0) {
+                MD = RequestHTTP;
+                return handleMethods();
+            }
+            return LOADING_PROCESS;
     }
     return HTTP_RESPONSE_500;
 }

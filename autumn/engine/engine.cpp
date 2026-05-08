@@ -11,6 +11,8 @@
 #include <unordered_set>
 #include "fileSearch.hpp"
 
+#define debug
+
 logger LOGGER(LoggerPath);
 std::unordered_set<std::string> staticDirectories;
 
@@ -24,6 +26,7 @@ void resetThreadState() {
     content_size = 0;
     rqEntity = requestEntity();
     CURRENT_TEMP_FILE_PATH = "";
+
 }
 
 void openSocket() {
@@ -74,6 +77,11 @@ void openSocket() {
             while (true) {
                 int bytes = recv(socket_client, buf, sizeof(buf), 0);
                 if (bytes <= 0) break;
+
+#ifdef debug
+            LOGGER.log_server("Received bytes: " + std::to_string(bytes), SERVER_PORT,
+                                 logger::DEBUG);
+#endif
 
                 std::string request_data(buf, bytes);
 
