@@ -3,10 +3,14 @@
 #include <iostream>
 #include <raindrop.hpp>
 #include "requestBodiesWorker.hpp"
+#include "logger.hpp"
 
 thread_local std::string CURRENT_TEMP_FILE_PATH;
 extern thread_local mode MD;
 extern thread_local int content_size;
+extern logger LOGGER;
+
+#define debug
 
 requestEntity parser::parse(const std::string &request) {
     requestEntity rqEntity;
@@ -49,22 +53,37 @@ requestEntity parser::parse(const std::string &request) {
             }
         }
 
+#ifdef debug
+        LOGGER.log_server("[PARSER] Bytes consumed length: " + std::to_string(bytes_consumed), SERVER_PORT,
+                          logger::DEBUG);
+        LOGGER.log_server("[PARSER] Content length: " + std::to_string(content_length), SERVER_PORT,
+                          logger::DEBUG);
+#endif
 
         if (content_length > 0) {
             const char *body_start = buffer + bytes_consumed;
+            size_t body_len = buf_len - bytes_consumed;
 
             if (content_length <= MaximumRequestSize - bytes_consumed) {
-                std::string body_str(body_start, content_length);
+                std::string body_str(body_start, body_len);
                 rqEntity.body = body_str;
+                if (request.length() < content_length + bytes_consumed) {
+                    content_size = content_length - body_len;
+                    MD = LoadingShortHTTP;
+                }
             } else {
-                size_t body_len = buf_len - bytes_consumed;
                 requestBodiesWorker::writeBodyToDisk(std::string(body_start, body_len), true);
                 rqEntity.body = CURRENT_TEMP_FILE_PATH;
                 content_size = content_length - body_len;
                 MD = LoadingHTTP;
             }
-
         }
+
+#ifdef debug
+        LOGGER.log_server("[PARSER] Request body length: " + std::to_string(rqEntity.body.length()), SERVER_PORT,
+                          logger::DEBUG);
+#endif
+
     } else if (bytes_consumed == -1) {
         std::cerr << "Parse error\n";
     } else {
