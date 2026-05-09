@@ -31,6 +31,12 @@ add_executable(Ceptember
         # Video worker
         core/utils/workers/videoWorker/videoWorker.cpp
 
+        # Photo worker
+        core/utils/workers/photoWorker/photoWorker.cpp
+
+        # Txt worker
+        core/utils/workers/txtWorker/txtWorker.cpp
+
         # Docs worker
         core/utils/workers/docsWorker/docsWorker.cpp
 
@@ -39,6 +45,9 @@ add_executable(Ceptember
 
         # Request processing
         core/utils/workers/requestBodiesWorker/requestBodiesWorker.cpp
+
+        # Response builder
+        core/utils/responseBuilder/responseBuilder.cpp
 
         # Delete file
         core/utils/deleteFile/deleteFile.cpp
