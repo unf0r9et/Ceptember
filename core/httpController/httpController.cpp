@@ -10,7 +10,7 @@ extern logger LOGGER;
 
 thread_local int content_size;
 
-thread_local mode MD = RequestHTTP;
+thread_local mode MDtoReceive = RequestHTTP;
 
 thread_local requestEntity rqEntity;
 
@@ -25,12 +25,12 @@ std::string httpController::handleMethods() {
 }
 
 std::string httpController::startHttpController(const std::string &request) {
-    switch (MD) {
+    switch (MDtoReceive) {
         case RequestHTTP:
 
             rqEntity = parser::parse(request);
 
-            if (MD == LoadingHTTP || MD == LoadingShortHTTP) {
+            if (MDtoReceive == LoadingHTTP || MDtoReceive == LoadingShortHTTP) {
                 return LOADING_PROCESS;
             }
 
@@ -48,7 +48,7 @@ std::string httpController::startHttpController(const std::string &request) {
             requestBodiesWorker::writeBodyToDisk(request, false);
             content_size -= static_cast<int>(request.length());
             if (content_size <= 0) {
-                MD = RequestHTTP;
+                MDtoReceive = RequestHTTP;
                 return handleMethods();
             }
             return LOADING_PROCESS;
@@ -75,7 +75,7 @@ std::string httpController::startHttpController(const std::string &request) {
 #endif
 
             if (content_size <= 0) {
-                MD = RequestHTTP;
+                MDtoReceive = RequestHTTP;
                 return handleMethods();
             }
             return LOADING_PROCESS;
