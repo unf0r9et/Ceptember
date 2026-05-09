@@ -60,7 +60,7 @@ int videoWorker::saveLongVideo(const requestEntity &request, const std::string &
 
     size_t footerSize = boundary.length() + 8;
     long long videoSize = (long long)fileSize - startOffsetInFile - footerSize;
-    if (videoSize < 0) videoSize = fileSize - startOffsetInFile; // Защита
+    if (videoSize < 0) videoSize = fileSize - startOffsetInFile; 
 
     if (title.empty()) title = videoPart->filename.empty() ? "video" : videoPart->filename;
     std::string ext = ".mp4";

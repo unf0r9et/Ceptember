@@ -6,6 +6,7 @@
 class videoWorker : public baseWorker {
 public:
     static int saveShortVideo(const requestEntity &request, const std::string &directoryPath);
+
     static int saveLongVideo(const requestEntity &request, const std::string &directoryPath);
 };
 
