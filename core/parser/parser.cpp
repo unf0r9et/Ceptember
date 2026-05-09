@@ -6,7 +6,7 @@
 #include "logger.hpp"
 
 thread_local std::string CURRENT_TEMP_FILE_PATH;
-extern thread_local mode MD;
+extern thread_local mode MDtoReceive;
 extern thread_local int content_size;
 extern logger LOGGER;
 
@@ -67,13 +67,13 @@ requestEntity parser::parse(const std::string &request) {
                 rqEntity.body = body_str;
                 if (request.length() < content_length + bytes_consumed) {
                     content_size = content_length - body_len;
-                    MD = LoadingShortHTTP;
+                    MDtoReceive = LoadingShortHTTP;
                 }
             } else {
                 requestBodiesWorker::writeBodyToDisk(std::string(body_start, body_len), true);
                 rqEntity.body = CURRENT_TEMP_FILE_PATH;
                 content_size = content_length - body_len;
-                MD = LoadingHTTP;
+                MDtoReceive = LoadingHTTP;
             }
         }
 
