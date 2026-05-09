@@ -10,8 +10,6 @@ extern thread_local mode MD;
 extern thread_local int content_size;
 extern logger LOGGER;
 
-#define debug
-
 requestEntity parser::parse(const std::string &request) {
     requestEntity rqEntity;
 

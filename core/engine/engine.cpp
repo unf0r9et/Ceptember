@@ -11,8 +11,6 @@
 #include <unordered_set>
 #include "fileSearch.hpp"
 
-#define debug
-
 logger LOGGER(LoggerPath);
 std::unordered_set<std::string> staticDirectories;
 

@@ -6,8 +6,6 @@
 #include "staticHandler.hpp"
 #include "requestBodiesWorker.hpp"
 
-#define debug
-
 extern logger LOGGER;
 
 thread_local int content_size;

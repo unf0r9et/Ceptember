@@ -8,40 +8,40 @@ add_executable(Ceptember
         src/main/main.cpp
 
         # Core
-        autumn/engine/engine.cpp
+        core/engine/engine.cpp
 
         # Logger
-        autumn/logger/logger.cpp
+        core/logger/logger.cpp
 
         # Parser
-        autumn/parser/parser.cpp
-        autumn/parser/picoHttpParser/picoHttpParser.c
-        autumn/parser/MultipartParser/MultipartParser.cpp
+        core/parser/parser.cpp
+        core/parser/picoHttpParser/picoHttpParser.c
+        core/parser/MultipartParser/MultipartParser.cpp
 
         # HTTP controller
-        autumn/httpController/httpController.cpp
+        core/httpController/httpController.cpp
 
         # Static handler
-        autumn/staticHandler/staticHandler.cpp
+        core/staticHandler/staticHandler.cpp
 
         # File worker
-        autumn/utils/workers/fileWorker/fileReader.cpp
-        autumn/utils/workers/fileWorker/fileSearch.cpp
+        core/utils/workers/fileWorker/fileReader.cpp
+        core/utils/workers/fileWorker/fileSearch.cpp
 
         # Video worker
-        autumn/utils/workers/videoWorker/videoWorker.cpp
+        core/utils/workers/videoWorker/videoWorker.cpp
 
         # Docs worker
-        autumn/utils/workers/docsWorker/docsWorker.cpp
+        core/utils/workers/docsWorker/docsWorker.cpp
 
         # File saver
-        autumn/utils/fileSaver/fileSaver.cpp
+        core/utils/fileSaver/fileSaver.cpp
 
         # Request processing
-        autumn/utils/workers/requestBodiesWorker/requestBodiesWorker.cpp
+        core/utils/workers/requestBodiesWorker/requestBodiesWorker.cpp
 
         # Delete file
-        autumn/utils/deleteFile/deleteFile.cpp
+        core/utils/deleteFile/deleteFile.cpp
 
         # Handlers
         src/main/handlers/GET.cpp
@@ -50,6 +50,6 @@ add_executable(Ceptember
         src/main/handlers/PUT.cpp
 )
 
-include_directories(${CMAKE_SOURCE_DIR}/autumn)
-include_directories(${CMAKE_SOURCE_DIR}/autumn/publicHeaders)
-include_directories(${CMAKE_SOURCE_DIR}/autumn/internalHeaders)
+include_directories(${CMAKE_SOURCE_DIR}/core)
+include_directories(${CMAKE_SOURCE_DIR}/core/publicHeaders)
+include_directories(${CMAKE_SOURCE_DIR}/core/internalHeaders)

@@ -7,6 +7,7 @@
 #include "str_switch.h"
 #include "raindrop.hpp"
 #include "requestEntity.hpp"
+#include "basicResponse.h"
 
 class httpController {
 public:
