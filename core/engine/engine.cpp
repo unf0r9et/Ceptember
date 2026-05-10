@@ -32,7 +32,7 @@ void resetThreadState() {
 }
 
 void openSocket() {
-    LOGGER.log_server("SERVER STARTED", SERVER_PORT, logger::INFO);
+    LOGGER.log_server("[ENGINE] SERVER STARTED", SERVER_PORT, logger::INFO);
 
     sockaddr_in socket_address = {AF_INET, htons(SERVER_PORT), INADDR_ANY, 0};
     const int socket_listener = socket(AF_INET, SOCK_STREAM, 0);
@@ -41,16 +41,16 @@ void openSocket() {
     setsockopt(socket_listener, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 
     if (bind(socket_listener, reinterpret_cast<struct sockaddr *>(&socket_address), sizeof(socket_address)) < 0) {
-        LOGGER.log_server("Error while trying to BIND socket", SERVER_PORT, logger::ERROR);
+        LOGGER.log_server("[ENGINE] Error while trying to BIND socket", SERVER_PORT, logger::ERROR);
         return;
     }
 
     if (listen(socket_listener, 5) < 0) {
-        LOGGER.log_server("Error while trying to LISTEN socket", SERVER_PORT, logger::ERROR);
+        LOGGER.log_server("[ENGINE] Error while trying to LISTEN socket", SERVER_PORT, logger::ERROR);
         return;
     }
 
-    LOGGER.log_server("Waiting for client...", SERVER_PORT, logger::INFO);
+    LOGGER.log_server("[ENGINE] Waiting for client...", SERVER_PORT, logger::INFO);
 
     while (true) {
         sockaddr_in client_address = {};
@@ -61,14 +61,14 @@ void openSocket() {
         if ((socket_client = accept(socket_listener, reinterpret_cast<struct sockaddr *>(&client_address),
                                     &client_len)) <
             0) {
-            LOGGER.log_server("Error while trying to ACCEPT socket", SERVER_PORT, logger::ERROR);
+            LOGGER.log_server("[ENGINE] Error while trying to ACCEPT socket", SERVER_PORT, logger::ERROR);
             return;
         }
 
-        LOGGER.log_server("Client connected", SERVER_PORT, logger::INFO);
+        LOGGER.log_server("[ENGINE] Client connected", SERVER_PORT, logger::INFO);
 
         LOGGER.log_server(
-            "Client " + std::string(inet_ntoa(client_address.sin_addr)) + ":" +
+            "[ENGINE] Client " + std::string(inet_ntoa(client_address.sin_addr)) + ":" +
             std::to_string(ntohs(client_address.sin_port)) + " connected", SERVER_PORT, logger::INFO);
 
         std::thread client_thread([socket_client]() {
@@ -84,6 +84,9 @@ void openSocket() {
                                 isWork = false;
                                 break;
                             }
+
+                            LOGGER.log_server("[ENGINE] Request: " + std::string(buf, 40), SERVER_PORT,
+                                              logger::INFO);
 
 #ifdef debug
                             LOGGER.log_server("Received bytes: " + std::to_string(bytes), SERVER_PORT,
@@ -136,8 +139,10 @@ void openSocket() {
                 close(socket_client);
             }
         );
-
         client_thread.detach();
+        LOGGER.log_server("[ENGINE] Client " + std::string(inet_ntoa(client_address.sin_addr)) + ":" +
+                          std::to_string(ntohs(client_address.sin_port)) + " disconnected", SERVER_PORT,
+                          logger::INFO);
     }
 }
 

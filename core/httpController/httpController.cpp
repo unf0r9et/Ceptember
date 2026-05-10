@@ -30,6 +30,10 @@ std::string httpController::startHttpController(const std::string &request) {
 
             rqEntity = parser::parse(request);
 
+            if (rqEntity.method == "ERROR") {
+                return HTTP_RESPONSE_400;
+            }
+
             if (MDtoReceive == LoadingHTTP || MDtoReceive == LoadingShortHTTP) {
                 return LOADING_PROCESS;
             }

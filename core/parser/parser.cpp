@@ -11,6 +11,7 @@ extern thread_local int content_size;
 extern logger LOGGER;
 
 requestEntity parser::parse(const std::string &request) {
+
     requestEntity rqEntity;
 
     const char *buffer = request.c_str();
@@ -83,9 +84,13 @@ requestEntity parser::parse(const std::string &request) {
 #endif
 
     } else if (bytes_consumed == -1) {
-        std::cerr << "Parse error\n";
+        LOGGER.log_server("[PARSER] Parse error ", SERVER_PORT,
+                        logger::ERROR);
+        rqEntity.method = "ERROR";
     } else {
-        std::cout << "Request incomplete, read more from socket...\n";
+        LOGGER.log_server("[PARSER] Request incomplete, read more from socket ", SERVER_PORT,
+                logger::ERROR);
+        rqEntity.method = "ERROR";
     }
 
     return rqEntity;
