@@ -87,7 +87,7 @@ void openSocket() {
                                 break;
                             }
 
-                            LOGGER.log_server("[ENGINE] Request: " + std::string(buf, 40), SERVER_PORT,
+                            LOGGER.log_server("[ENGINE] Request: " + std::string(buf, std::min(bytes, 40)), SERVER_PORT,
                                               logger::INFO);
 
 #ifdef debug
