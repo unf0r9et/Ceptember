@@ -67,11 +67,13 @@ void openSocket() {
 
         LOGGER.log_server("[ENGINE] Client connected", SERVER_PORT, logger::INFO);
 
-        LOGGER.log_server(
-            "[ENGINE] Client " + std::string(inet_ntoa(client_address.sin_addr)) + ":" +
-            std::to_string(ntohs(client_address.sin_port)) + " connected", SERVER_PORT, logger::INFO);
+        std::thread client_thread([socket_client, client_address]() {
 
-        std::thread client_thread([socket_client]() {
+                std::string client_info = std::string(inet_ntoa(client_address.sin_addr)) + ":" +
+                                          std::to_string(ntohs(client_address.sin_port));
+
+                LOGGER.log_server("[ENGINE] Client " + client_info + " connected", SERVER_PORT, logger::INFO);
+
                 resetThreadState();
 
                 char buf[MaximumRequestSize];
@@ -116,7 +118,7 @@ void openSocket() {
                                     while (file.read(buffer.data(), buffer.size()) || file.gcount() > 0) {
                                         std::streamsize bytesRead = file.gcount();
 
-                                        ssize_t bytesSent = send(socket_client, buffer.data(), bytesRead, 0);
+                                        ssize_t bytesSent = send(socket_client, buffer.data(), bytesRead, MSG_NOSIGNAL);
 
                                         if (bytesSent == -1) {
                                             isWork = false;
@@ -137,12 +139,12 @@ void openSocket() {
                 }
 
                 close(socket_client);
+                LOGGER.log_server("[ENGINE] Client " + std::string(inet_ntoa(client_address.sin_addr)) + ":" +
+                                  std::to_string(ntohs(client_address.sin_port)) + " disconnected", SERVER_PORT,
+                                  logger::INFO);
             }
         );
         client_thread.detach();
-        LOGGER.log_server("[ENGINE] Client " + std::string(inet_ntoa(client_address.sin_addr)) + ":" +
-                          std::to_string(ntohs(client_address.sin_port)) + " disconnected", SERVER_PORT,
-                          logger::INFO);
     }
 }
 
