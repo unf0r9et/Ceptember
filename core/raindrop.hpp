@@ -14,6 +14,7 @@
 #define LoggerPath "../core/files/logs/frameworkLogs.txt"
 #define TEMP_FILE_PREFIX "../core/files/requestBodies/unf0r9etpref_"
 #define LOADING_PROCESS "LOADING_PROCESS"
+#define TIMEOUT 30
 
 enum mode { RequestHTTP, LoadingHTTP, LoadingShortHTTP };
 
