@@ -32,6 +32,9 @@ void resetThreadState() {
 }
 
 void openSocket() {
+
+    engine::printLogo();
+
     LOGGER.log_server("[ENGINE] SERVER STARTED", SERVER_PORT, logger::INFO);
 
     sockaddr_in socket_address = {AF_INET, htons(SERVER_PORT), INADDR_ANY, 0};
