@@ -10,7 +10,7 @@ class requestEntity {
 public:
     std::string method;
     std::string path;
-    std::vector<std::pair<std::string, std::string>> headers;
+    std::map<std::string, std::string> headers;
     std::string body;
 };
 
